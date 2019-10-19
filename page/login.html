@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="text-body" style="background-color: #404040;font-family: 'Nanum Gothic', sans-serif;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>MRS_eel_launcher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;subset=korean">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript">
+        function saveToken(data) {
+            $.removeCookie("save")
+            $.removeCookie("name")
+            $.removeCookie("uuid")
+            $.removeCookie("client")
+            $.removeCookie("access")
+            if ($('#saveInfo')[0].checked) {
+                $.cookie("save", "y", {expires: new Date(2100, 1, 1, 0, 0, 0), path: "/", domain: "localhost"})
+                $.cookie("name", data[0], {expires: new Date(2100, 1, 1, 0, 0, 0), path: "/", domain: "localhost"})
+                $.cookie("uuid", data[1], {expires: new Date(2100, 1, 1, 0, 0, 0), path: "/", domain: "localhost"})
+                $.cookie("client", data[2], {expires: new Date(2100, 1, 1, 0, 0, 0), path: "/", domain: "localhost"})
+                $.cookie("access", data[3], {expires: new Date(2100, 1, 1, 0, 0, 0), path: "/", domain: "localhost"})
+            } else {
+                $.cookie("save", "n", {expires: new Date(2100, 1, 1, 0, 0, 0), path: "/", domain: "localhost"})
+                $.cookie("name", data[0], {path: "/", domain: "localhost"})
+                $.cookie("uuid", data[1], {path: "/", domain: "localhost"})
+                $.cookie("client", data[2], {path: "/", domain: "localhost"})
+                $.cookie("access", data[3], {path: "/", domain: "localhost"})
+            }
+            if (data[2]) window.location.href = "/debug.html"
+            return data[2]
+        }
+
+        if ($.cookie("save") == "y") {
+            if (isTokenVaild(loadToken())) {
+                $('#saveInfo').click()
+                saveToken(refreshToken())
+            }
+            window.location.href = "/debug.html"
+        }
+
+        function loadToken() {
+            try {
+                return [$.cookie("name"), $.cookie("uuid"), $.cookie("access"), $.cookie("client")]
+            } catch (e) {
+                return [undefined, undefined, undefined, undefined]
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+
+<body class="text-center" style="background-color: #404040;">
+<div class="login-clean" style="background-color: rgb(64,64,64);">
+    <form method="post" style="background-color: #f14d24;">
+        <h2 class="sr-only">Login Form</h2>
+        <div class="illustration"><img class="bg-white border rounded-circle shadow-none tada animated"
+                                       src="assets/img/remake.png" style="padding: 5px;width: 128px;height: 128px;">
+        </div>
+        <div class="form-group"><input class="border rounded form-control" id="id" type="email" name="id"
+                                       placeholder="Email" style="font-family: 'Nanum Gothic', sans-serif;"></div>
+        <div class="form-group"><input class="border rounded form-control" id="password" type="password" name="password"
+                                       placeholder="Password" style="font-family: 'Nanum Gothic', sans-serif;"></div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block border rounded" id="login" type="button"
+                    style="background-color: #ffffff;color: rgb(0,0,0);width: 200px;margin-left: 20px;font-family: 'Nanum Gothic', sans-serif;">
+                Log In
+            </button>
+        </div>
+        <!-- for debugging -->
+        <label for="saveInfo" style="color: white">로그인 저장</label>
+        <input type="checkbox" id="saveInfo" name="saveInfo">
+        <a class="forgot" href="#"
+           style="color: rgb(106,146,255);font-family: 'Nanum Gothic', sans-serif;">Forgot your email or password?</a>
+    </form>
+    <script type="text/javascript">
+        $("#login").on("click", function (event) {
+            var token = login($("#id").val(), $("#password").val(), saveToken)
+        })
+    </script>
+</div>
+</body>
+
+</html>
