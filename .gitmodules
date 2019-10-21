@@ -16,3 +16,6 @@
 [submodule "src/github.com/asticode/go-bindata"]
 	path = src/github.com/asticode/go-bindata
 	url = https://github.com/asticode/go-bindata
+[submodule "src\\github.com\\akavel\\rsrc"]
+	path = src\\github.com\\akavel\\rsrc
+	url = https://github.com/akavel/rsrc
