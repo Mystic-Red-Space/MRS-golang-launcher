@@ -20,7 +20,7 @@ This is using the bootstrap and the bundler.`
 var (
 	AppName string
 	BuiltAt string
-	debug   = flag.Bool("d", false, "enables the debug mode")
+	debug   = flag.Bool("d", true, "enables the debug mode")
 	w       *astilectron.Window
 )
 
@@ -75,7 +75,7 @@ func main() {
 		},
 		RestoreAssets: RestoreAssets,
 		Windows: []*bootstrap.Window{{
-			Homepage:       "index.html",
+			Homepage:       "login.html",
 			MessageHandler: handleMessages,
 			Options: &astilectron.WindowOptions{
 				BackgroundColor: astilectron.PtrStr("#333"),
