@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 export GOPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-rm -rf src pkg bin
 go get -u -v github.com/asticode/go-astilectron
 go get -u -v github.com/asticode/go-astilectron-bootstrap
 go get -u -v github.com/asticode/go-astilectron-bundler/...

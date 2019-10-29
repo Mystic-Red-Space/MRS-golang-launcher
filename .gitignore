@@ -2,3 +2,6 @@
 /output
 *.syso
 bind_*
+bin
+src
+pkg
