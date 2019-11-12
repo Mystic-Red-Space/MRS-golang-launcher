@@ -19,7 +19,7 @@ func main() {
 	idInput := widgets.NewQLineEdit(widget)
 	idInput.SetPlaceholderText("E-mail")
 	idInput.SetEchoMode(widgets.QLineEdit__PasswordEchoOnEdit)
-	widget.Layout().AddChildLayout(idInput)
+	widget.Layout().AddWidget(idInput)
 	window.Show()
 	app.Exec()
 
