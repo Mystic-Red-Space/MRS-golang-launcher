@@ -1,7 +1,0 @@
-/go_build_MRS_golang_launcher_main_go.exe
-/output
-*.syso
-bind_*
-bin
-src
-pkg
