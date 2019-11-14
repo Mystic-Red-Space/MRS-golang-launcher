@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/JoshuaDoes/go-yggdrasil"
 	"github.com/google/uuid"
+        "io"
 	"io/ioutil"
 	"net/http"
 	"os"
