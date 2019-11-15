@@ -1,2 +1,4 @@
 language: go
-os: osx
+os: os
+install: export GO111MODULE=off; xcode-select --install; go get -v github.com/therecipe/qt/cmd/... && $(go env GOPATH)/bin/qtsetup test && $(go env GOPATH)/bin/qtsetup -test=false;go get -t -v ./...;docker pull therecipe/qt:linux;docker pull therecipe/qt:windows_64_static
+build: qtdeploy -docker build windows_64_static;qtdeploy build desktop;qtdeploy -docker build linux
